@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Imagen</title>
+</head>
+<body>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        {{ img.imagen }}
+        <img src="">
+    </form>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form2 }}
+        <input type="submit" value="Procesar2">
+    </form>
+    {% for img in img %}
+        <img src="{{ img.image.url }}">
+    {% endfor %}
+    <img src="L0Wwka.png" height="50px" width="100px">
+    <img src="44283507.jpg" height="50px" width="100px">
+    <!-- <script src="../static/js/script.js"></script> -->
+</body>
+</html>
