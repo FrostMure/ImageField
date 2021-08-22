@@ -2,25 +2,19 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from image.models import imagen
-from .forms import ImageForm, FormImagen
+from .forms import ImageForm
 
 # Create your views here.
 
 def MostrarImagen (request):
-    form2 = FormImagen()
+
     if request.method == "POST":
         form = ImageForm(request.POST, request.FILES)
-        #if FormImagen.is_valid():
-         #   ImageForm.save()
-          #  messages.info(request, '!Informacion Guardad con Exito!')
+        if form.is_valid():
+            form.save()
+            img_obj = form.instance
+            return render(request, 'MostrarImagen.html', {'form': form,'img_obj': img_obj})
     else:
         form = ImageForm()
-
     img = imagen.objects.all()
-
-    return render(request, 'MostrarImagen.html', {'form': form, 'img': img, 'form2': form2})
-
-
-#imagen = request.POST.get('file').read()
-#uploadFile = request.FILES['file'].read()
-# return render(request, 'MostrarImagen.html', {'imagen': imagen})
+    return render(request, 'MostrarImagen.html', {'form': form, 'img': img})

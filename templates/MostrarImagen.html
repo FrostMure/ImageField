@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,21 +10,24 @@
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form }}
-        {{ img.imagen }}
-        <img src="">
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
     </form>
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form2 }}
-        <input type="submit" value="Procesar2">
-    </form>
-    {% for img in img %}
-        <img src="{{ img.image.url }}">
-    {% endfor %}
-    <img src="L0Wwka.png" height="50px" width="100px">
-    <img src="44283507.jpg" height="50px" width="100px">
+    <br/>
+    <br/>
+    <br/>
+
+    <!-- Arreglar que muestre los elementos con fotos aunque existan algunos que no tengan asociadas -->
+
+        {% if img_obj %}
+            <h1>Succesfully uploaded : {{ img_obj.name }}</h1>
+            <img src="{{ img_obj.image.url }}" width="1000px" height="400px">
+        {% endif %}
+    
+    <img src="{{ img.image.url }}">
+    <!-- <img src="{% static 'test/45194087.jpg' %}" alt=""> -->
+
     <!-- <script src="../static/js/script.js"></script> -->
 </body>
 </html>

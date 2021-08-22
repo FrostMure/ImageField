@@ -1,12 +1,11 @@
 from django import forms
-from django.forms import ModelForm
 from image.models import imagen
 
-class ImageForm(forms.Form):
-    file = forms.ImageField()
-
-class FormImagen(ModelForm):
+class ImageForm(forms.ModelForm):
     class Meta:
         model = imagen
-        fields = '__all__'
-        #widgets = {'name': forms.HiddenInput()}
+        fields = ('__all__')
+
+    name = forms.CharField()
+    category = forms.CharField()
+    image = forms.ImageField()
